@@ -1,16 +1,21 @@
 package com.realworld.dto.user;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.realworld.model.User;
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Data
-public record RegistrationRequest(String email, String username, String password) {
+@Getter
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class RegistrationRequest {
+
+    private UserDto user;
 
     public User toEntity() {
         return User.builder()
-                .email(email)
-                .username(username)
-                .password(password)
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .password(user.getPassword())
                 .build();
     }
 }

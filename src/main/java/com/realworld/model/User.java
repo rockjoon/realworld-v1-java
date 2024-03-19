@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Getter
+@Table(name = "'user'")
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
@@ -24,14 +25,19 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(length = 32, nullable = false, unique = true)
     private String email;
 
+    @Column(length = 32, nullable = false)
     private String password;
 
+    @Column(length = 32, nullable = false, unique = true)
     private String username;
 
+    @Column(length = 500)
     private String bio;
 
+    @Column(length = 255)
     private String image;
 
     public void encodePassword(PasswordEncoder passwordEncoder) {
